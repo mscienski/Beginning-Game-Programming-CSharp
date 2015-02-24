@@ -23,9 +23,16 @@ namespace Week1
         static void Main(string[] args)
         {
             //Declare the variables used for calculations, initialized inputs to 0
-            float theta = 0, speed = 0, vox, voy, t, h, dx;
+            float theta = 0;
+            float speed = 0;
+            float vox;
+            float voy;
+            float t;
+            float h;
+            float dx;
+
             //Gravity is a constant 9.8 m/s
-            const float g = 9.8F;
+            const float GRAVITY = 9.8F;
 
             //Introduce the program
             Console.WriteLine("Welcome to the Week 1 Shell Trajectory Calculator");
