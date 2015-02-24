@@ -39,8 +39,15 @@ namespace Week1
                 {
                     //Prompt for angle input
                     Console.Write("Enter an initial angle in degrees: ");
-                    //Try to get a valid number from the user, and convert it to radians, store in theta
-                    theta = ((float)Math.PI / 180) * float.Parse(Console.ReadLine());
+                    //Try to get a valid number from the user and store in theta
+                    theta = float.Parse(Console.ReadLine());
+                    if (theta < 0 || theta > 180)
+                    {
+                        //Technically, angles should be above the ground, i.e. between 0 and 180 degrees
+                        throw new ArgumentOutOfRangeException();
+                    }
+                    //Convert theta to radians
+                    theta = ((float)Math.PI / 180) * theta;
                     //If we are successful, break out of the loop
                     break;
                 }
@@ -48,6 +55,12 @@ namespace Week1
                 {
                     //If the user entered something thats not a number, let them know and prompt for input again
                     Console.WriteLine("The input was not recognized as a valid number.");
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    //If the user entered an invalid angle , let them know and prompt for input again
+                    //Technically not an argument exception since it's not calling a method, but close enough for our purposes, and we're not ready for custom exceptions quite yet
+                    Console.WriteLine("The angle must be between 0 and 180 degrees");
                 }
                 catch (Exception e)
                 {
@@ -68,6 +81,11 @@ namespace Week1
                     Console.Write("Enter an initial speed in m/s: ");
                     //Try to get a valid number from the user and store in speed
                     speed = float.Parse(Console.ReadLine());
+                    if (speed < 0)
+                    {
+                        //Speed should be positive
+                        throw new ArgumentOutOfRangeException();
+                    }
                     //If we are successful, break out of the loop
                     break;
                 }
@@ -75,6 +93,12 @@ namespace Week1
                 {
                     //If the user entered something thats not a number, let them know and prompt for input again
                     Console.WriteLine("The input was not recognized as a valid number.");
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    //If the user entered a negative number, let them know and prompt for input again
+                    //Technically not an argument exception since it's not calling a method, but close enough for our purposes, and we're not ready for custom exceptions quite yet
+                    Console.WriteLine("The speed cannot be a negative number.");
                 }
                 catch (Exception e)
                 {
@@ -98,8 +122,8 @@ namespace Week1
             dx = 2 * vox * t;
 
             //Output our results, formatted to 3 decimal places
-            Console.WriteLine("The calculated height of the shell is: " + h.ToString("F3"));
-            Console.WriteLine("The calculated distance of the shell is: " + dx.ToString("F3"));
+            Console.WriteLine("The calculated height of the shell is: " + h.ToString("F3") + " meters.");
+            Console.WriteLine("The calculated distance of the shell is: " + dx.ToString("F3") + " meters.");
 
             //End with a blank line
             Console.WriteLine();
