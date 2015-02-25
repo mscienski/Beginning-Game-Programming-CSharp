@@ -10,6 +10,7 @@ namespace Lab2
     {
         static void Main(string[] args)
         {
+            //A comment so git will commit
             int age;
             const int MAX_SCORE = 100;
             int score = 97;
