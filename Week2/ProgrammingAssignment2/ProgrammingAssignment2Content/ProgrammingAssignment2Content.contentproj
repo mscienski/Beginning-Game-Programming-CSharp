@@ -30,20 +30,18 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="teddybear0.png">
-      <Name>teddybear0</Name>
+    <Compile Include="llama.png">
+      <Name>llama</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="teddybear1.png">
-      <Name>teddybear1</Name>
+    <Compile Include="pig.png">
+      <Name>pig</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="next.png">
-      <Name>next</Name>
+    <Compile Include="sheep.png">
+      <Name>sheep</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

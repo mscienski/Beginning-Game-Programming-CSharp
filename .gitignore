@@ -45,3 +45,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#videos because git is stupid about binary files, and let's not pollute
+*.mp4
+*.avi
+*.mov
