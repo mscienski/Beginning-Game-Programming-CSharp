@@ -78,11 +78,11 @@ namespace GameProject
                 drawRectangle.X = value - drawRectangle.Width / 2;
 
                 // clamp to keep in range
-                if (drawRectangle.X < 0)
+                if (drawRectangle.Left < 0)
                 {
                     drawRectangle.X = 0;
                 }
-                else if (drawRectangle.X > GameConstants.WINDOW_WIDTH - drawRectangle.Width)
+                else if (drawRectangle.Right > GameConstants.WINDOW_WIDTH)
                 {
                     drawRectangle.X = GameConstants.WINDOW_WIDTH - drawRectangle.Width;
                 }
@@ -100,11 +100,11 @@ namespace GameProject
                 drawRectangle.Y = value - drawRectangle.Height / 2;
 
                 // clamp to keep in range
-                if (drawRectangle.Y < 0)
+                if (drawRectangle.Top < 0)
                 {
                     drawRectangle.Y = 0;
                 }
-                else if (drawRectangle.Y > GameConstants.WINDOW_HEIGHT - drawRectangle.Height)
+                else if (drawRectangle.Bottom > GameConstants.WINDOW_HEIGHT)
                 {
                     drawRectangle.Y = GameConstants.WINDOW_HEIGHT - drawRectangle.Height;
                 }
@@ -124,15 +124,43 @@ namespace GameProject
         public void Update(GameTime gameTime, MouseState mouse)
         {
             // burger should only respond to input if it still has health
-
+            if (this.health > 0)
+            {
                 // move burger using mouse
+                X = mouse.X;
+                Y = mouse.Y;
 
                 // clamp burger in window
+                // this is done in the X and Y setter methods
 
                 // update shooting allowed
+                if (!canShoot)
+                {
+                    this.elapsedCooldownTime += gameTime.ElapsedGameTime.Milliseconds;
+                }
+
+                //shooting allowed when time is elapsed or mouse button released
+                if (this.elapsedCooldownTime >= GameConstants.BURGER_COOLDOWN_MILLISECONDS || mouse.LeftButton == ButtonState.Released)
+                {
+                    canShoot = true;
+                    this.elapsedCooldownTime = 0;
+                }
+
                 // timer concept (for animations) introduced in Chapter 7
 
                 // shoot if appropriate
+                if (mouse.LeftButton == ButtonState.Pressed && canShoot)
+                {
+                    canShoot = false;
+                    //create a projectile and add it to Game1
+                    Projectile projectile = new Projectile(ProjectileType.FrenchFries,
+                        Game1.GetProjectileSprite(ProjectileType.FrenchFries),
+                        X,
+                        Y - GameConstants.FRENCH_FRIES_PROJECTILE_OFFSET,
+                        GameConstants.FRENCH_FRIES_PROJECTILE_SPEED);
+                    Game1.AddProjectile(projectile);
+                }
+            }
 
         }
 

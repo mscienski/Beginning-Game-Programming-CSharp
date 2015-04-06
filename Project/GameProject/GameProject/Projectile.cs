@@ -89,9 +89,24 @@ namespace GameProject
         public void Update(GameTime gameTime)
         {
             // move projectile
+            if (this.type == ProjectileType.FrenchFries)
+            {
+                this.drawRectangle.Y -= (int)(this.yVelocity * gameTime.ElapsedGameTime.Milliseconds);
+            }
+            else if (this.type == ProjectileType.TeddyBear)
+            {
+                this.drawRectangle.Y += (int)(this.yVelocity * gameTime.ElapsedGameTime.Milliseconds);
+            }
 
             // check for outside game window
-
+            if (this.drawRectangle.Bottom < 0)
+            {
+                this.Active = false;
+            }
+            if (this.drawRectangle.Top > GameConstants.WINDOW_HEIGHT)
+            {
+                this.Active = false;
+            }
         }
 
         /// <summary>
@@ -100,7 +115,7 @@ namespace GameProject
         /// <param name="spriteBatch">the sprite batch to use</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            spriteBatch.Draw(this.sprite, this.drawRectangle, Color.White);
         }
 
         #endregion
