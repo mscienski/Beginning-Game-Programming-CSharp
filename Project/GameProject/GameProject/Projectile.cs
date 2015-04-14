@@ -99,11 +99,7 @@ namespace GameProject
             }
 
             // check for outside game window
-            if (this.drawRectangle.Bottom < 0)
-            {
-                this.Active = false;
-            }
-            if (this.drawRectangle.Top > GameConstants.WINDOW_HEIGHT)
+            if (this.drawRectangle.Bottom < 0 || this.drawRectangle.Top > GameConstants.WINDOW_HEIGHT)
             {
                 this.Active = false;
             }

@@ -150,8 +150,8 @@ namespace GameProject
                 //create a projectile and add it to Game1
                 Projectile projectile = new Projectile(ProjectileType.TeddyBear,
                     Game1.GetProjectileSprite(ProjectileType.TeddyBear),
-                    this.drawRectangle.X + GameConstants.TEDDY_BEAR_PROJECTILE_OFFSET,
-                    this.drawRectangle.Y + GameConstants.TEDDY_BEAR_PROJECTILE_OFFSET,
+                    this.drawRectangle.Center.X,
+                    this.drawRectangle.Center.Y + GameConstants.TEDDY_BEAR_PROJECTILE_OFFSET,
                     GetProjectileYVelocity());
                 Game1.AddProjectile(projectile);
             }
