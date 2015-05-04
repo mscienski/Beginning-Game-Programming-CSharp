@@ -63,6 +63,16 @@ namespace GameProject
             get { return drawRectangle; }
         }
 
+        public int Health
+        {
+            get { return health; }
+            set { 
+                if (health >=0 && health <=100) {
+                    health = value;
+                }
+            }
+        }
+
         #endregion
 
         #region Private properties
