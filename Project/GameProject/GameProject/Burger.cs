@@ -131,14 +131,31 @@ namespace GameProject
         /// </summary>
         /// <param name="gameTime">game time</param>
         /// <param name="mouse">the current state of the mouse</param>
-        public void Update(GameTime gameTime, MouseState mouse)
+        public void Update(GameTime gameTime, KeyboardState keyboard)
         {
             // burger should only respond to input if it still has health
             if (this.health > 0)
             {
                 // move burger using mouse
-                X = mouse.X;
-                Y = mouse.Y;
+                //X = mouse.X;
+                //Y = mouse.Y;
+
+                if (keyboard.IsKeyDown(Keys.W))
+                {
+                    Y -= GameConstants.BURGER_MOVEMENT_AMOUNT;
+                }
+                if (keyboard.IsKeyDown(Keys.S))
+                {
+                    Y += GameConstants.BURGER_MOVEMENT_AMOUNT;
+                }
+                if (keyboard.IsKeyDown(Keys.A))
+                {
+                    X -= GameConstants.BURGER_MOVEMENT_AMOUNT;
+                }
+                if (keyboard.IsKeyDown(Keys.D))
+                {
+                    X += GameConstants.BURGER_MOVEMENT_AMOUNT;
+                }
 
                 // clamp burger in window
                 // this is done in the X and Y setter methods
@@ -150,7 +167,12 @@ namespace GameProject
                 }
 
                 //shooting allowed when time is elapsed or mouse button released
-                if (this.elapsedCooldownTime >= GameConstants.BURGER_COOLDOWN_MILLISECONDS || mouse.LeftButton == ButtonState.Released)
+                //if (this.elapsedCooldownTime >= GameConstants.BURGER_COOLDOWN_MILLISECONDS || mouse.LeftButton == ButtonState.Released)
+                //{
+                //    canShoot = true;
+                //    this.elapsedCooldownTime = 0;
+                //}
+                if (this.elapsedCooldownTime >= GameConstants.BURGER_COOLDOWN_MILLISECONDS || keyboard.IsKeyUp(Keys.Space))
                 {
                     canShoot = true;
                     this.elapsedCooldownTime = 0;
@@ -159,16 +181,33 @@ namespace GameProject
                 // timer concept (for animations) introduced in Chapter 7
 
                 // shoot if appropriate
-                if (mouse.LeftButton == ButtonState.Pressed && canShoot)
+                //if (mouse.LeftButton == ButtonState.Pressed && canShoot)
+                //{
+                //    canShoot = false;
+                //    //create a projectile and add it to Game1
+                //    Projectile projectile = new Projectile(ProjectileType.FrenchFries,
+                //        Game1.GetProjectileSprite(ProjectileType.FrenchFries),
+                //        X,
+                //        Y - GameConstants.FRENCH_FRIES_PROJECTILE_OFFSET,
+                //        GameConstants.FRENCH_FRIES_PROJECTILE_SPEED);
+                //    Game1.AddProjectile(projectile);
+
+                //    //play shoot sound
+                //    this.shootSound.Play();
+                //}
+
+                if (keyboard.IsKeyDown(Keys.Space) && canShoot)
                 {
                     canShoot = false;
-                    //create a projectile and add it to Game1
                     Projectile projectile = new Projectile(ProjectileType.FrenchFries,
                         Game1.GetProjectileSprite(ProjectileType.FrenchFries),
                         X,
                         Y - GameConstants.FRENCH_FRIES_PROJECTILE_OFFSET,
                         GameConstants.FRENCH_FRIES_PROJECTILE_SPEED);
                     Game1.AddProjectile(projectile);
+
+                    //play shoot sound
+                    this.shootSound.Play();
                 }
             }
 
